@@ -1,2 +1,2 @@
 # ohjelmistoprojekti
-Ohjelmoinnin perusteet - ensimmäinen projekti
+Luon tänne ensimmäisen Python-projektini.
