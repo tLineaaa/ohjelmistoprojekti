@@ -22,7 +22,8 @@ def lisaa_ystava(lista):
         "Lempiruoka": ruoka,
         "Lempieläin": elain,
         "Haaveammatti": ammatti,
-        "Päivän fiilis hymiönä": fiilis
+        "Päivän fiilis hymiönä": fiilis,
+        "Paras vitsi": vitsi
     }
 
     lista.append(tallennus)
@@ -34,19 +35,37 @@ ystavakirja = lisaa_ystava(ystavakirja)
 for avain, arvo in tallennus.items():
     print(f"{avain}: {arvo}")
 
+def vitsin_arvonta():
+    for  in ystavakirja:
+        return random_choice(vitsi)
+
 
 #Luodaan haku (ehkä funktioksi jossain kohtaa)
-haettava = input("Kenen tiedot näytetään?")
+def haettava():
+    input("Kenen tiedot näytetään?")
 
-for tallennus in ystavakirja:
-    if tallennus["Nimi"].lower() == haettava.lower(): # Muutetaan tallennus- ja haettava-osioista kirjaimet pieniksi, joten ei merkitystä, haetaanko Lily vai lily
-        for avain, arvo in tallennus.items(): #Saadaan kaikki tiedot .items:illä
-            print(f"{avain}: {arvo}")
-    else:
-        print("Ystäväkirjassasi ei ole tämän nimistä henkilöä")
-        lisaa_puuttuva = input("Haluaisitko lisätä ystävän tiedot? (k)yllä/(e)i") #Harkitaan, jos isot ja pienet kirjaimet tässäkin ok?
-        if lisaa_puuttuva.lower() == "k":
-            lisaa_ystava(ystavakirja)
+    for tallennus in ystavakirja:
+        if tallennus["Nimi"].lower() == haettava.lower(): # Muutetaan tallennus- ja haettava-osioista kirjaimet pieniksi, joten ei merkitystä, haetaanko Lily vai lily
+            for avain, arvo in tallennus.items(): #Saadaan kaikki tiedot .items:illä
+                print(f"{avain}: {arvo}")
+        else:
+            print("Ystäväkirjassasi ei ole tämän nimistä henkilöä")
+            lisaa_puuttuva = input("Haluaisitko lisätä ystävän tiedot? (k)yllä/(e)i") #Harkitaan, jos isot ja pienet kirjaimet tässäkin ok?
+            if lisaa_puuttuva.lower() == "k":
+                lisaa_ystava(ystavakirja)
             #Tähän funktio, jotta saa uudet tiedot syötettyä
-        if lisaa_puuttuva == "e":
-            print(haettava) #kysyy uudelleen, mutta voisi palata ihan alkuunkin - alkua ei vielä ole :D
+            if lisaa_puuttuva == "e":
+                print(valinta) #kysyy uudelleen, mutta voisi palata ihan alkuunkin - alkua ei vielä ole :D
+
+while True:
+    valinta = int(input("Ystäväkirja\n\nMitä haluaisit tehdä?\n\n1. Lisää kaveri\n2. Etsi kaveri\n3. Lue vitsi\n4.Lopeta"))
+
+    if valinta == 1:
+        lisaa_ystava(ystavakirja)
+    if valinta == 2:
+        haettava()
+    if valinta == 3:
+        vitsin_arvonta()
+    if valinta == 4:
+        print("Heihei!")
+        break
