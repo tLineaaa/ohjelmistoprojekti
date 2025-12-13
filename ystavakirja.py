@@ -36,7 +36,7 @@ for avain, arvo in tallennus.items():
     print(f"{avain}: {arvo}")
 
 def vitsin_arvonta():
-    for  in ystavakirja:
+    for talllennus in ystavakirja:
         return random_choice(vitsi)
 
 
