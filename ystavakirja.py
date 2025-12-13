@@ -52,7 +52,7 @@ ystavakirja = [
     "Lempiruoka": "Kolmen kaverin jäätelö: suklaa",
     "Lempieläin": "hevonen",
     "Haaveammatti": "opettaja",
-    "Päivän fiilis hymiönä": ":*",
+    "Päivän fiilis hymiönä": ">_<",
     "Paras vitsi": "Miksi Suomessa palkat eivät kasva? - Koska jokaisella firmalla on palkanlaskija!"}]
 
 
@@ -104,20 +104,15 @@ def ilme(ystavakirja):
 
 #Luodaan haku (ehkä funktioksi jossain kohtaa)
 def haettava(lista):
-    haettava = input("Kenen tiedot näytetään?\nNimi: ")
+    haettava = input("Kenen tiedot näytetään?\n\nEtsitään: ")
+    print("_"*20)
 
-    for tallennus in ystavakirja:
-        if tallennus["Nimi"].lower() == haettava.lower(): # Muutetaan tallennus- ja haettava-osioista kirjaimet pieniksi, joten ei merkitystä, haetaanko Lily vai lily
-            for avain, arvo in tallennus.items(): #Saadaan kaikki tiedot .items:illä
-                print(f"{avain}: {arvo}")
-        else:
-            print("Ystäväkirjassasi ei ole tämän nimistä henkilöä")
-            lisaa_puuttuva = input("Haluaisitko lisätä ystävän tiedot? (k)yllä/(e)i ") #Harkitaan, jos isot ja pienet kirjaimet tässäkin ok?
-            if lisaa_puuttuva.lower() == "k":
-                lisaa_ystava(ystavakirja)
-            #Tähän funktio, jotta saa uudet tiedot syötettyä
-            if lisaa_puuttuva == "e":
-                print(valinta) #kysyy uudelleen, mutta voisi palata ihan alkuunkin - alkua ei vielä ole :D
+    for ystava in ystavakirja:
+        if ystava["Nimi"].lower() == haettava.lower(): # Muutetaan tallennus- ja haettava-osioista kirjaimet pieniksi, joten ei merkitystä, haetaanko Lily vai lily
+            for avain, arvo in ystava.items(): #Saadaan kaikki tiedot .items:illä
+                print(f"\n{avain}: {arvo}")
+            return
+    print("Ystäväkirjassasi ei ole tämän nimistä henkilöä")
 
 while True:
     print("="*35)
@@ -128,14 +123,16 @@ while True:
     if valinta == 1:
         lisaa_ystava(ystavakirja)
     if valinta == 2:
-        print(haettava(ystavakirja))
+        haettava(ystavakirja)
+        input("\nTakaisin valikkoon: paina Enter")
     if valinta == 3:
         print("\n" + "-"*35)
-        print("🎉 Päivän vitsi 🎉".center(35))
+        print("🎉 päivän vitsi 🎉".center(35))
         print("-"*35)
         print(f"\n{vitsin_arvonta(ystavakirja)}\n")
-        print(f"Ilmeesti nyt: {ilme(ystavakirja)}\n")
-        print("\n" + "-"*35)
+        print(f"Ilmeesti nyt:\n\n {ilme(ystavakirja)}\n")
+        print("-"*35)
+        input("Takaisin valikkoon: paina Enter\n")
     if valinta == 4:
         print("Heihei!")
         break

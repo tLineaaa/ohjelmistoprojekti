@@ -7,7 +7,7 @@ lukea kavereiden kirjaamia vitsejä.
 
 ## Toiminnot
 - Lisää ystävä
-- Hae ystävän tiedot nimen perusteella
+- Hae ystävän tiedot nimen perusteella (valmiina kirjassa: Eevi, Elina, Jouko, Mira, Miro)
 - Arvo satunnainen vitsi
 - Lopeta ohjelma
 
