@@ -5,8 +5,8 @@ ystavakirja = []
 
 #Syötetään testidataa ystäväkirjaan, jotta ohjelma toimii samantien vitsien ja haun kohdalla
 ystavakirja = [
-    {"Nimi": "Jouni",
-    "Lempinimi": "Jouko",
+    {"Nimi": "Jouko",
+    "Lempinimi": "Jokke",
     "Ikä": 70,
     "Lempiväri": "sininen",
     "Lempiruoka": "makaronilaatikko",
@@ -84,12 +84,6 @@ def lisaa_ystava(lista):
     lista.append(tallennus)
     return lista
 
-#Tulostetaan siistinä (voi olla turha tai pitää siirtää - harkitaan)
-"""for avain, arvo in tallennus.items():
-    print(f"{avain}: {arvo}")
-    
-    ystavakirja = lisaa_ystava(ystavakirja)"""
-
 def vitsin_arvonta(lista):
     vitsit = []
     for kaveri in ystavakirja:
@@ -102,7 +96,7 @@ def ilme(ystavakirja):
         hymiot.append(kaveri["Päivän fiilis hymiönä"])
     return random.choice(hymiot)
 
-#Luodaan haku (ehkä funktioksi jossain kohtaa)
+#Luodaan haku
 def haettava(lista):
     haettava = input("Kenen tiedot näytetään?\n\nEtsitään: ")
     print("_"*20)
@@ -112,10 +106,13 @@ def haettava(lista):
             for avain, arvo in ystava.items(): #Saadaan kaikki tiedot .items:illä
                 print(f"\n{avain}: {arvo}")
             return
-    print("Ystäväkirjassasi ei ole tämän nimistä henkilöä")
+    print("Ystäväkirjassasi ei ole tämän nimistä henkilöä") #Jos haku ei tuota tulosta, voidaan kaveri lisätä kirjaan
+    valinta = input("Haluatko lisätä uuden ystävän? (K)llä/(E)i ")
+    if valinta.lower() == "k":
+        lisaa_ystava(ystavakirja)
 
 while True:
-    print("="*35)
+    print("="*35) #Lisätty koristeluja ja keskittämistä
     print("❤️  YSTÄVÄKIRJA ❤️".center(35, " "))
     print("="*35)
     valinta = int(input("\nMitä haluaisit tehdä (valitse numero)?\n\n1 - Lisää kaveri\n2 - Etsi kaveri\n3 - Lue vitsi\n4 - Lopeta\n\nValitsen: "))
@@ -124,9 +121,9 @@ while True:
         lisaa_ystava(ystavakirja)
     if valinta == 2:
         haettava(ystavakirja)
-        input("\nTakaisin valikkoon: paina Enter")
+        input("\nTakaisin valikkoon: paina Enter") #Pysäytetään ohjelma hetkeksi, jotta valikko ei tulostu heti perään, vaan tulokset ehtii katsoa rauhassa
     if valinta == 3:
-        print("\n" + "-"*35)
+        print("\n" + "-"*35) #Lisätty koristeluja ja keskittämistä
         print("🎉 päivän vitsi 🎉".center(35))
         print("-"*35)
         print(f"\n{vitsin_arvonta(ystavakirja)}\n")
