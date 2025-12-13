@@ -1,9 +1,9 @@
-# Ystäväkirja - ohjelmistoprojekti
+# Ohjelmistoprojekti: ystäväkirja
 
 ## Kuvaus
 Tekstipohjainen Python-sovellus, jossa käyttäjä
 voi lisätä ystäviä, hakea heidän tietojaan ja
-lukea ystävien syöttämiä vitsejä.
+lukea kavereiden kirjaamia vitsejä.
 
 ## Toiminnot
 - Lisää ystävä
@@ -12,7 +12,7 @@ lukea ystävien syöttämiä vitsejä.
 - Lopeta ohjelma
 
 ## Ohjelman rakenne
-![Ystäväkirjan diagrammi](images\ystavakirja_suunnitelma.drawio.png)
+![Ystäväkirjan diagrammi](images/ystavakirja_suunnitelma.drawio.png)
 
 ## Toteutus
 Ohjelma on toteutettu Pythonilla käyttäen listaa ja
