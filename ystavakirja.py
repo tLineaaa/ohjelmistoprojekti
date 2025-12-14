@@ -111,17 +111,21 @@ def haettava(lista):
     if valinta.lower() == "k":
         lisaa_ystava(ystavakirja)
 
+def pituus(lista):
+    return (F"Sinulla on tällä hetkellä {len(ystavakirja)} ystävää kirjassasi.")
+
 while True:
     print("="*35) #Lisätty koristeluja ja keskittämistä
     print("❤️  YSTÄVÄKIRJA ❤️".center(35, " "))
     print("="*35)
+    print(pituus(ystavakirja))
     valinta = int(input("\nMitä haluaisit tehdä (valitse numero)?\n\n1 - Lisää kaveri\n2 - Etsi kaveri\n3 - Lue vitsi\n4 - Lopeta\n\nValitsen: "))
 
     if valinta == 1:
         lisaa_ystava(ystavakirja)
     if valinta == 2:
         haettava(ystavakirja)
-        input("\nTakaisin valikkoon: paina Enter") #Pysäytetään ohjelma hetkeksi, jotta valikko ei tulostu heti perään, vaan tulokset ehtii katsoa rauhassa
+        input("\nTakaisin valikkoon paina Enter") #Pysäytetään ohjelma hetkeksi, jotta valikko ei tulostu heti perään, vaan tulokset ehtii katsoa rauhassa
     if valinta == 3:
         print("\n" + "-"*35) #Lisätty koristeluja ja keskittämistä
         print("🎉 päivän vitsi 🎉".center(35))
@@ -129,7 +133,7 @@ while True:
         print(f"\n{vitsin_arvonta(ystavakirja)}\n")
         print(f"Ilmeesti nyt:\n\n {ilme(ystavakirja)}\n")
         print("-"*35)
-        input("Takaisin valikkoon: paina Enter\n")
+        input("Takaisin valikkoon paina Enter\n")
     if valinta == 4:
         print("Heihei!")
         break
