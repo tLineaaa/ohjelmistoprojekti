@@ -1,0 +1,12 @@
+Ystäväkirja
+--------------------
+Nimi: Marko
+Lempinimi: Make
+Ikä: 56
+Lempiväri: punainen
+Lempiruoka: karjalanpaisti
+Lempieläin: koira
+Haaveammatti: palomies
+Päivän fiilis hymiönä: :)
+Paras vitsi: Kaksi mummoa meni mustikkaan, toinen ei mahtunut!
+--------------------

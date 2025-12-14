@@ -3,7 +3,7 @@ import random #Saadaan random-arpoja vitsejä varten
 #Luodaan ystäväkirja-lista
 ystavakirja = []
 
-#Syötetään testidataa ystäväkirjaan, jotta ohjelma toimii samantien vitsien ja haun kohdalla
+#Syötetään testidataa ystäväkirjaan, jotta ohjelma toimii samantien vitsien ja haun kohdalla (ei kuitenkaan tallennettu kirja.txt)
 ystavakirja = [
     {"Nimi": "Jouko",
     "Lempinimi": "Jokke",
@@ -55,6 +55,12 @@ ystavakirja = [
     "Päivän fiilis hymiönä": ">_<",
     "Paras vitsi": "Miksi Suomessa palkat eivät kasva? - Koska jokaisella firmalla on palkanlaskija!"}]
 
+#Luodaan funktio, jotta voidaan lisätä ystävän tiedot txt.tiedostoon (syötetty valmiiksi yhden henkilön tiedot - voi poistaa + alustus tehty vsc:n "lisää tiedosto"-napilla)
+def tallenna_ystava(tiedostonnimi, tiedot):
+    with open(tiedostonnimi, "a", encoding="utf-8") as tiedosto: #utf-8, niin toimii ääkköset ja kuulemma hymiötkin
+        for avain, arvo in tiedot.items():
+            tiedosto.write(f"{avain}: {arvo}\n")
+        tiedosto.write("--------------------\n") #vähän selkeyttä ystävien väliin
 
 #Luodaan kyselylomake
 def lisaa_ystava(lista):
@@ -82,6 +88,7 @@ def lisaa_ystava(lista):
     }
 
     lista.append(tallennus)
+    tallenna_ystava("kirja.txt", tallennus)
     return lista
 
 def vitsin_arvonta(lista):
@@ -119,13 +126,13 @@ while True:
     print("❤️  YSTÄVÄKIRJA ❤️".center(35, " "))
     print("="*35)
     print(pituus(ystavakirja))
-    valinta = int(input("\nMitä haluaisit tehdä (valitse numero)?\n\n1 - Lisää kaveri\n2 - Etsi kaveri\n3 - Lue vitsi\n4 - Lopeta\n\nValitsen: "))
+    valinta = int(input("\nMitä haluaisit tehdä (valitse numero)?\n\n1 - Lisää kaveri\n2 - Etsi kaveri\n3 - Lue vitsi\n4 - Lue koko ystäväkirja\n5 - Lopeta\n\nValitsen: "))
 
     if valinta == 1:
         lisaa_ystava(ystavakirja)
     if valinta == 2:
         haettava(ystavakirja)
-        input("\nTakaisin valikkoon paina Enter") #Pysäytetään ohjelma hetkeksi, jotta valikko ei tulostu heti perään, vaan tulokset ehtii katsoa rauhassa
+        input("\nPalaa takaisin valikkoon painamalla Enter\n") #Pysäytetään ohjelma hetkeksi, jotta valikko ei tulostu heti perään, vaan tulokset ehtii katsoa rauhassa
     if valinta == 3:
         print("\n" + "-"*35) #Lisätty koristeluja ja keskittämistä
         print("🎉 päivän vitsi 🎉".center(35))
@@ -133,7 +140,12 @@ while True:
         print(f"\n{vitsin_arvonta(ystavakirja)}\n")
         print(f"Ilmeesti nyt:\n\n {ilme(ystavakirja)}\n")
         print("-"*35)
-        input("Takaisin valikkoon paina Enter\n")
+        input("Palaa takaisin valikkoon painamalla Enter\n")
     if valinta == 4:
+        with open("kirja.txt", encoding="utf8") as luetaan:
+            sisalto = luetaan.read()
+            print(sisalto)
+        input("Palaa takaisin valikkoon painamalla Enter\n")
+    if valinta == 5:
         print("Heihei!")
         break
