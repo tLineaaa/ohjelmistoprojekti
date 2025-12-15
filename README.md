@@ -12,7 +12,7 @@ lukea kavereiden kirjaamia vitsejä.
 - Lopeta ohjelma
 
 ## Ohjelman rakenne
-![Ystäväkirjan diagrammi](images/ystavakirja_suunnitelma.drawio.png)
+![Ystäväkirjan diagrammi](images/ystavakirja_suunnitelmat.drawio.png)
 
 ## Toteutus
 Ohjelma on toteutettu Pythonilla käyttäen listaa ja
