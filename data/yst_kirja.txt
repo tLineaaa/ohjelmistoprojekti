@@ -6,18 +6,8 @@ Lempinimi: Make
 Ikä: 56
 Lempiväri: punainen
 Lempiruoka: karjalanpaisti
-Lempieläin: koira
+Lempieläin: koira 🐶
 Haaveammatti: palomies
 Päivän fiilis hymiönä: :)
 Paras vitsi: Kaksi mummoa meni mustikkaan, toinen ei mahtunut!
---------------------
-Nimi: Ari
-Lempinimi: Ari
-Ikä: 5
-Lempiväri: sininen
-Lempiruoka: spagetti
-Lempieläin: koira 🐶
-Haaveammatti: joulupukki
-Päivän fiilis hymiönä: :)
-Paras vitsi: Okei.
 --------------------

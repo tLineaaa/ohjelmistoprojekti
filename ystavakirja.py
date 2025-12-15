@@ -148,15 +148,15 @@ def haettava(lista):
             for avain, arvo in ystava.items(): #Saadaan kaikki tiedot .items:illä
                 print(f"\n{avain}: {arvo}")
             return
-    print("Ystäväkirjassasi ei ole tämän nimistä henkilöä") #Jos haku ei tuota tulosta, voidaan kaveri lisätä kirjaan
-    valinta = input("Haluatko lisätä uuden ystävän? (K)llä/(E)i ")
+    print("Ystäväkirjassasi ei ole tämän nimistä henkilöä")
+    valinta = input("Haluatko lisätä uuden ystävän? (K)llä/(E)i ") #Jos haku ei tuota tulosta, voidaan kaveri lisätä kirjaan
     if valinta.lower() == "k":
         lisaa_ystava(ystavakirja)
 
 def pituus(lista):
     return (F"Sinulla on tällä hetkellä {len(ystavakirja)} ystävää kirjassasi.")
 
-def tauko_ja_paluun():
+def tauko_ja_paluu():
     input("\nPalaa takaisin valikkoon painamalla Enter\n") #Pysäytetään ohjelma hetkeksi, jotta valikko ei tulostu heti perään, vaan tulokset ehtii katsoa rauhassa
 
 while True:
@@ -170,7 +170,7 @@ while True:
         lisaa_ystava(ystavakirja)
     if valinta == 2:
         haettava(ystavakirja)
-        tauko_ja_paluun()
+        tauko_ja_paluu()
     if valinta == 3:
         print("\n" + "-"*35) #Lisätty koristeluja ja keskittämistä
         print("🎉 päivän vitsi 🎉".center(35))
@@ -178,17 +178,17 @@ while True:
         print(f"\n{vitsin_arvonta(ystavakirja)}\n")
         print(f"Ilmeesti nyt:\n\n {ilme(ystavakirja)}\n")
         print("-"*35)
-        tauko_ja_paluun()
+        tauko_ja_paluu()
     if valinta == 4:
         with open("data/yst_kirja.txt", encoding="utf8") as luetaan:
             sisalto = luetaan.read()
             print(sisalto)
-        tauko_ja_paluun()
+        tauko_ja_paluu()
     if valinta == 5:
         with open("data/vitsikirja.txt", encoding="utf-8") as haha:
             kaikki = haha.read()
             print(kaikki)
-        tauko_ja_paluun()
+        tauko_ja_paluu()
     if valinta == 6:
         print("Heihei!")
         break
