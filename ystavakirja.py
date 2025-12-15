@@ -3,6 +3,19 @@ import random #Saadaan random-arpoja vitsejä varten
 #Luodaan ystäväkirja-lista
 ystavakirja = []
 
+#Luodaan funktio, jotta voidaan lisätä ystävän tiedot txt.tiedostoon (syötetty valmiiksi yhden henkilön tiedot - voi poistaa + alustus tehty vsc:n "lisää tiedosto"-napilla)
+def tallenna_ystava(tiedostonnimi, tiedot):
+    with open(tiedostonnimi, "a", encoding="utf-8") as tiedosto: #utf-8, niin toimii ääkköset ja kuulemma hymiötkin
+        for avain, arvo in tiedot.items():
+            tiedosto.write(f"{avain}: {arvo}\n")
+        tiedosto.write("--------------------\n") #vähän selkeyttä ystävien väliin
+
+#Sama kuin yllä, mutta rakennetaan vitsikirjaa vitsikirja.txt-tiedostoon (tallentaa samatkin, joten vrt. olemassa olevaa ja syötettävää kirjainkoosta riippumatta äläkä tallenna, jos löytyy jo?)
+def tallenna_vitsi(tiedostonnimi, vitsi):
+    with open(tiedostonnimi, "a", encoding="utf-8") as tiedosto: #tästä voisi kyllä harkita omaa funktiota
+        tiedosto.write(f"\n{vitsi}\n\n")
+        tiedosto.write("~~~~~~~~~~~~~~~~~~~~\n")
+
 #Syötetään testidataa ystäväkirjaan, jotta ohjelma toimii samantien vitsin heiton ja kaverihaun kohdalla (ei kuitenkaan tallennettu yst_kirja.txt tai vitsi.txt)
 ystavakirja = [
     {"Nimi": "Jouko",
@@ -55,22 +68,13 @@ ystavakirja = [
     "Päivän fiilis hymiönä": ">_<",
     "Paras vitsi": "Miksi Suomessa palkat eivät kasva? - Koska jokaisella firmalla on palkanlaskija!"}]
 
-#Luodaan funktio, jotta voidaan lisätä ystävän tiedot txt.tiedostoon (syötetty valmiiksi yhden henkilön tiedot - voi poistaa + alustus tehty vsc:n "lisää tiedosto"-napilla)
-def tallenna_ystava(tiedostonnimi, tiedot):
-    with open(tiedostonnimi, "a", encoding="utf-8") as tiedosto: #utf-8, niin toimii ääkköset ja kuulemma hymiötkin
-        for avain, arvo in tiedot.items():
-            tiedosto.write(f"{avain}: {arvo}\n")
-        tiedosto.write("--------------------\n") #vähän selkeyttä ystävien väliin
-
-#Sama kuin yllä, mutta rakennetaan vitsikirjaa vitsikirja.txt-tiedostoon (tallentaa samatkin, joten vrt. olemassa olevaa ja syötettävää kirjainkoosta riippumatta äläkä tallenna, jos löytyy jo?)
-def tallenna_vitsi(tiedostonnimi, vitsi):
-    with open(tiedostonnimi, "a", encoding="utf-8") as tiedosto: #tästä voisi kyllä harkita omaa funktiota
-        tiedosto.write(f"\n{vitsi}\n\n")
-        tiedosto.write("~~~~~~~~~~~~~~~~~~~~\n")
+for ystava in ystavakirja:
+    tallenna_vitsi("data/testivitsi.txt", ystava["Paras vitsi"])
+    tallenna_ystava("data/testidata.txt", ystava)
 
 def kysy_teksti(tieto): #tsekataan, ettei vastaus ole tyhjä -funktio
     while True:
-        vastaus = input(tieto).strip()
+        vastaus = input(tieto).strip() #poistaa välilyönnit, joten välilyönti ei kelpaa vastaukseksi
         if vastaus:
             return vastaus
         print("Hups, unohdit vastata kysymykseen!")
@@ -102,7 +106,7 @@ def lisaa_ystava(lista):
         elain += " 🐰"
     elif elain in ("kala", "kalat", "fisu", "fisut"):
         elain += " 🐟"
-    elif elain in ("käärme", "mato", "python"):
+    elif elain in ("käärme", "mato", "pyton"):
         elain += " 🐍"
     ammatti = kysy_teksti("Haaveammatti: ")
     fiilis = kysy_teksti("Päivän fiilis hymiönä: ")
@@ -122,8 +126,8 @@ def lisaa_ystava(lista):
     }
 
     lista.append(tallennus)
-    tallenna_ystava("data/yst_kirja.txt", tallennus)
-    tallenna_vitsi("data/vitsikirja.txt", tallennus["Paras vitsi"])
+    tallenna_ystava("data/testidata.txt", tallennus)
+    tallenna_vitsi("data/testivitsi.txt", tallennus["Paras vitsi"])
     return lista
 
 def vitsin_arvonta(lista):
@@ -180,12 +184,12 @@ while True:
         print("-"*35)
         tauko_ja_paluu()
     if valinta == 4:
-        with open("data/yst_kirja.txt", encoding="utf8") as luetaan:
+        with open("data/testidata.txt", encoding="utf8") as luetaan:
             sisalto = luetaan.read()
             print(sisalto)
         tauko_ja_paluu()
     if valinta == 5:
-        with open("data/vitsikirja.txt", encoding="utf-8") as haha:
+        with open("data/testivitsi.txt", encoding="utf-8") as haha:
             kaikki = haha.read()
             print(kaikki)
         tauko_ja_paluu()
