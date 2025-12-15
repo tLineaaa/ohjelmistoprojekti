@@ -3,7 +3,7 @@ import random #Saadaan random-arpoja vitsejä varten
 #Luodaan ystäväkirja-lista
 ystavakirja = []
 
-#Syötetään testidataa ystäväkirjaan, jotta ohjelma toimii samantien vitsien ja haun kohdalla (ei kuitenkaan tallennettu kirja.txt)
+#Syötetään testidataa ystäväkirjaan, jotta ohjelma toimii samantien vitsin heiton ja kaverihaun kohdalla (ei kuitenkaan tallennettu yst_kirja.txt tai vitsi.txt)
 ystavakirja = [
     {"Nimi": "Jouko",
     "Lempinimi": "Jokke",
@@ -62,7 +62,13 @@ def tallenna_ystava(tiedostonnimi, tiedot):
             tiedosto.write(f"{avain}: {arvo}\n")
         tiedosto.write("--------------------\n") #vähän selkeyttä ystävien väliin
 
-#Luodaan kyselylomake
+#Sama kuin yllä, mutta rakennetaan vitsikirjaa vitsikirja.txt-tiedostoon (tallentaa samatkin, joten vrt. olemassa olevaa ja syötettävää kirjainkoosta riippumatta äläkä tallenna, jos löytyy jo?)
+def tallenna_vitsi(tiedostonnimi, vitsi):
+    with open(tiedostonnimi, "a", encoding="utf-8") as tiedosto: #tästä voisi kyllä harkita omaa funktiota
+        tiedosto.write(f"\n{vitsi}\n\n")
+        tiedosto.write("~~~~~~~~~~~~~~~~~~~~\n")
+
+#Luodaan kyselylomake (lisää try/expect)
 def lisaa_ystava(lista):
     nimi = input("Nimi: ")
     lempinimi = input("Lempinimi: ")
@@ -88,7 +94,8 @@ def lisaa_ystava(lista):
     }
 
     lista.append(tallennus)
-    tallenna_ystava("kirja.txt", tallennus)
+    tallenna_ystava("yst_kirja.txt", tallennus)
+    tallenna_vitsi("vitsikirja.txt", tallennus["Paras vitsi"])
     return lista
 
 def vitsin_arvonta(lista):
@@ -121,18 +128,21 @@ def haettava(lista):
 def pituus(lista):
     return (F"Sinulla on tällä hetkellä {len(ystavakirja)} ystävää kirjassasi.")
 
+def tauko_ja_paluun():
+    input("\nPalaa takaisin valikkoon painamalla Enter\n") #Pysäytetään ohjelma hetkeksi, jotta valikko ei tulostu heti perään, vaan tulokset ehtii katsoa rauhassa
+
 while True:
     print("="*35) #Lisätty koristeluja ja keskittämistä
     print("❤️  YSTÄVÄKIRJA ❤️".center(35, " "))
     print("="*35)
     print(pituus(ystavakirja))
-    valinta = int(input("\nMitä haluaisit tehdä (valitse numero)?\n\n1 - Lisää kaveri\n2 - Etsi kaveri\n3 - Lue vitsi\n4 - Lue koko ystäväkirja\n5 - Lopeta\n\nValitsen: "))
+    valinta = int(input("\nMitä haluaisit tehdä (valitse numero)?\n\n1 - Lisää kaveri\n2 - Etsi kaveri\n3 - Heitä vitsillä\n4 - Lue koko ystäväkirja\n5 - Lue vitsikirjaa\n6 - Lopeta\n\nValitsen: "))
 
     if valinta == 1:
         lisaa_ystava(ystavakirja)
     if valinta == 2:
         haettava(ystavakirja)
-        input("\nPalaa takaisin valikkoon painamalla Enter\n") #Pysäytetään ohjelma hetkeksi, jotta valikko ei tulostu heti perään, vaan tulokset ehtii katsoa rauhassa
+        tauko_ja_paluun()
     if valinta == 3:
         print("\n" + "-"*35) #Lisätty koristeluja ja keskittämistä
         print("🎉 päivän vitsi 🎉".center(35))
@@ -140,12 +150,17 @@ while True:
         print(f"\n{vitsin_arvonta(ystavakirja)}\n")
         print(f"Ilmeesti nyt:\n\n {ilme(ystavakirja)}\n")
         print("-"*35)
-        input("Palaa takaisin valikkoon painamalla Enter\n")
+        tauko_ja_paluun()
     if valinta == 4:
         with open("kirja.txt", encoding="utf8") as luetaan:
             sisalto = luetaan.read()
             print(sisalto)
-        input("Palaa takaisin valikkoon painamalla Enter\n")
+        tauko_ja_paluun()
     if valinta == 5:
+        with open("vitsikirja.txt", encoding="utf-8") as haha:
+            kaikki = haha.read()
+            print(kaikki)
+        tauko_ja_paluun()
+    if valinta == 6:
         print("Heihei!")
         break
