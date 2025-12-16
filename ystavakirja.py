@@ -1,21 +1,22 @@
-import random #Saadaan random-arpoja vitsejä varten
+import random # Saadaan random-arpoja vitsejä varten
 
-#Luodaan ystäväkirja-lista
+# Luodaan ystäväkirja-lista
 ystavakirja = []
 
-#Luodaan funktio, jotta voidaan lisätä ystävän tiedot txt.tiedostoon (syötetty valmiiksi yhden henkilön tiedot - voi poistaa + alustus tehty vsc:n "lisää tiedosto"-napilla)
+# Luodaan funktio, jotta voidaan lisätä ystävän tiedot txt.tiedostoon (syötetty valmiiksi yhden henkilön tiedot - voi poistaa + alustus tehty vsc:n "lisää tiedosto"-napilla)
 def tallenna_ystava(tiedostonnimi, tiedot):
-    with open(tiedostonnimi, "a", encoding="utf-8") as tiedosto: #utf-8, niin toimii ääkköset ja kuulemma hymiötkin
+    with open(tiedostonnimi, "a", encoding="utf-8") as tiedosto: # utf-8, niin toimii ääkköset ja kuulemma hymiötkin
         for avain, arvo in tiedot.items():
             tiedosto.write(f"{avain}: {arvo}\n")
-        tiedosto.write("--------------------\n") #vähän selkeyttä ystävien väliin
+        tiedosto.write("--------------------\n") # Vähän selkeyttä ystävien väliin
 
-#Sama kuin yllä, mutta rakennetaan vitsikirjaa vitsikirja.txt-tiedostoon (tallentaa samatkin, joten vrt. olemassa olevaa ja syötettävää kirjainkoosta riippumatta äläkä tallenna, jos löytyy jo?)
+# Sama kuin yllä, mutta rakennetaan vitsikirjaa vitsikirja.txt-tiedostoon (tallentaa samatkin, joten vrt. olemassa olevaa ja syötettävää kirjainkoosta riippumatta äläkä tallenna, jos löytyy jo?)
 def tallenna_vitsi(tiedostonnimi, vitsi):
-    with open(tiedostonnimi, "a", encoding="utf-8") as tiedosto: #tästä voisi kyllä harkita omaa funktiota
+    with open(tiedostonnimi, "a", encoding="utf-8") as tiedosto: # Tästä voisi kyllä harkita omaa funktiota
         tiedosto.write(f"\n{vitsi}\n\n")
         tiedosto.write("~~~~~~~~~~~~~~~~~~~~\n")
 
+# Funktio, joka määrittelee, että jos annettu parametri on jokin seuraavista, lisätään sen perään tietty hymiö
 def lisaa_hymio(elain):
     if elain in ("koira", "hauva", "rakki"):
         elain += " 🐶"
@@ -35,7 +36,7 @@ def lisaa_hymio(elain):
         elain += " 🐍"
     return elain
 
-#Syötetään testidataa ystäväkirjaan, jotta ohjelma toimii samantien vitsin heiton ja kaverihaun kohdalla (ei kuitenkaan tallennettu yst_kirja.txt tai vitsi.txt)
+# Syötetään testidataa ystäväkirjaan, jotta ohjelma toimii samantien vitsin heiton ja kaverihaun kohdalla (ei kuitenkaan tallennettu yst_kirja.txt tai vitsi.txt)
 ystavakirja = [
     {"Nimi": "Jouko",
     "Lempinimi": "Jokke",
@@ -87,19 +88,19 @@ ystavakirja = [
     "Päivän fiilis hymiönä": ">_<",
     "Paras vitsi": "Miksi Suomessa palkat eivät kasva? - Koska jokaisella firmalla on palkanlaskija!"}]
 
-for ystava in ystavakirja:
+for ystava in ystavakirja: # Lisätään hymiöt, tallennetaan testidatoihin (oli aluksi pois nämä, mutta muutin esimerkkien parantamiseksi)
     ystava["Lempieläin"] = lisaa_hymio(ystava["Lempieläin"])
     tallenna_vitsi("data/testivitsi.txt", ystava["Paras vitsi"])
     tallenna_ystava("data/testidata.txt", ystava)
 
-def kysy_teksti(tieto): #tsekataan, ettei vastaus ole tyhjä -funktio
-    while True:
-        vastaus = input(tieto).strip() #poistaa välilyönnit, joten välilyönti ei kelpaa vastaukseksi
-        if vastaus:
+def kysy_teksti(tieto): # Tsekataan, ettei vastaus ole tyhjä -funktio
+    while True: # Ikuisuussilmukka kunnes return
+        vastaus = input(tieto).strip() # Poistaa välilyönnit, joten välilyönti ei kelpaa vastaukseksi
+        if vastaus: # Sit kun on hyväksyttävä vastaus, niin palauttaa sen
             return vastaus
-        print("Hups, unohdit vastata kysymykseen!")
+        print("Hups, unohdit vastata kysymykseen!") # Virheellisessä vastauksessa tulostaa tämän ja kysyy uudelleen
 
-#Luodaan kyselylomake (lisää try/expect)
+#Luodaan kyselylomake
 def lisaa_ystava(lista):
     nimi = kysy_teksti("Nimi: ")
     lempinimi = kysy_teksti("Lempinimi: ")
@@ -112,12 +113,12 @@ def lisaa_ystava(lista):
     vari = kysy_teksti("Lempiväri: ")
     ruoka = kysy_teksti("Lempiruoka: ")
     elain = kysy_teksti("Lempieläin: ")
-    elain = lisaa_hymio(elain)
+    elain = lisaa_hymio(elain) #Lisätään täällä jo hymiö lempieläimen perään
     ammatti = kysy_teksti("Haaveammatti: ")
     fiilis = kysy_teksti("Päivän fiilis hymiönä: ")
     vitsi = kysy_teksti("Paras vitsi: ")
 
-#Tallennetaan vastaukset sanakirjaksi
+# Tallennetaan vastaukset sanakirjaksi (avain: arvo)
     tallennus = {
         "Nimi": nimi,
         "Lempinimi": lempinimi,
@@ -130,35 +131,35 @@ def lisaa_ystava(lista):
         "Paras vitsi": vitsi
     }
 
-    lista.append(tallennus)
-    tallenna_ystava("data/testidata.txt", tallennus)
-    tallenna_vitsi("data/testivitsi.txt", tallennus["Paras vitsi"])
+    lista.append(tallennus) # Lisää "tallennus" listalle [parametri funktiossa]
+    tallenna_ystava("data/testidata.txt", tallennus) # Käytä funkiota tallenna_ystava tiedoilla testidata.txt ja tallennus eli tallentaa tallennuksen annettuun tekstitiedostoon
+    tallenna_vitsi("data/testivitsi.txt", tallennus["Paras vitsi"]) # Sama kuin yllä, mutta nyt tallentaa tallennus-osiosta vain kohdan "Paras vitsi" arvon ja eri tiedostoon
     return lista
 
 def vitsin_arvonta(lista):
-    vitsit = []
-    for kaveri in ystavakirja:
-        vitsit.append(kaveri["Paras vitsi"])
-    return random.choice(vitsit)
+    vitsit = [] # Tyhjä lista
+    for kaveri in ystavakirja: # Kaveri ystäväkirjassa (eli lista sanakirjoista eli yksi sanakirja)
+        vitsit.append(kaveri["Paras vitsi"]) # Lisää vitsit-listaan sanakirjoista arvo kohdasta "Paras vitsi"
+    return random.choice(vitsit) # Palauta satunnainen vitsi vitsit-listalta
 
-def ilme(ystavakirja):
+def ilme(ystavakirja): # Sama kuin yllä, mutta hymiöistä
     hymiot = []
     for kaveri in ystavakirja:
         hymiot.append(kaveri["Päivän fiilis hymiönä"])
     return random.choice(hymiot)
 
-#Luodaan haku
+# Luodaan haku
 def haettava(lista):
     haettava = input("Kenen tiedot näytetään?\n\nEtsitään: ")
-    print("_"*20)
+    print("_"*20) # Koristelua, selkeyttää lukettavuutta
 
     for ystava in ystavakirja:
-        if ystava["Nimi"].lower() == haettava.lower(): # Muutetaan tallennus- ja haettava-osioista kirjaimet pieniksi, joten ei merkitystä, haetaanko Lily vai lily
-            for avain, arvo in ystava.items(): #Saadaan kaikki tiedot .items:illä
-                print(f"\n{avain}: {arvo}")
+        if ystava["Nimi"].lower() == haettava.lower(): # Muutetaan tallennus- ja haettava-osioista kirjaimet pieniksi, joten ei merkitystä, haetaanko Lily vai lily ja jos haku vastaa haettavaa niin:
+            for avain, arvo in ystava.items(): # Saadaan kaikki tiedot .items:illä
+                print(f"\n{avain}: {arvo}") # Tulostetaan tiedot ko. henkilösta
             return
     print("Ystäväkirjassasi ei ole tämän nimistä henkilöä")
-    valinta = input("Haluatko lisätä uuden ystävän? (K)llä/(E)i ") #Jos haku ei tuota tulosta, voidaan kaveri lisätä kirjaan
+    valinta = input("Haluatko lisätä uuden ystävän? (K)llä/(E)i ") # Jos haku ei tuota tulosta, voidaan kaveri lisätä kirjaan
     if valinta.lower() == "k":
         lisaa_ystava(ystavakirja)
 
@@ -166,22 +167,22 @@ def pituus(lista):
     return (F"Sinulla on tällä hetkellä {len(ystavakirja)} ystävää kirjassasi.")
 
 def tauko_ja_paluu():
-    input("\nPalaa takaisin valikkoon painamalla Enter\n") #Pysäytetään ohjelma hetkeksi, jotta valikko ei tulostu heti perään, vaan tulokset ehtii katsoa rauhassa
+    input("\nPalaa takaisin valikkoon painamalla Enter\n") # Pysäytetään ohjelma hetkeksi, jotta valikko ei tulostu heti perään, vaan tulokset ehtii katsoa rauhassa
 
-while True:
-    print("="*35) #Lisätty koristeluja ja keskittämistä
+while True: # Taas ikuisuussilmukka
+    print("="*35) # Lisätty koristeluja ja keskittämistä
     print("❤️  YSTÄVÄKIRJA ❤️".center(35, " "))
     print("="*35)
     print(pituus(ystavakirja))
     valinta = int(input("\nMitä haluaisit tehdä (valitse numero)?\n\n1 - ✍  Lisää kaveri\n2 - 🔎 Etsi kaveri\n3 - 😂 Heitä vitsillä\n4 - 👯 Lue koko ystäväkirja\n5 - 😝 Lue vitsikirjaa\n6 - ❌ Lopeta\n\nValitsen: "))
-
-    if valinta == 1:
+# Yllä pyydetään siis syöttämään luku
+    if valinta == 1: # Jos valinta on "tämä" niin tehdään "näin"
         lisaa_ystava(ystavakirja)
     if valinta == 2:
         haettava(ystavakirja)
         tauko_ja_paluu()
     if valinta == 3:
-        print("\n" + "-"*35) #Lisätty koristeluja ja keskittämistä
+        print("\n" + "-"*35) # Lisätty koristeluja ja keskittämistä
         print("🎉 päivän vitsi 🎉".center(35))
         print("-"*35)
         print(f"\n{vitsin_arvonta(ystavakirja)}\n")
@@ -200,4 +201,4 @@ while True:
         tauko_ja_paluu()
     if valinta == 6:
         print("Heihei!")
-        break
+        break #Silmukka poikki
