@@ -16,6 +16,25 @@ def tallenna_vitsi(tiedostonnimi, vitsi):
         tiedosto.write(f"\n{vitsi}\n\n")
         tiedosto.write("~~~~~~~~~~~~~~~~~~~~\n")
 
+def lisaa_hymio(elain):
+    if elain in ("koira", "hauva", "rakki"):
+        elain += " 🐶"
+    elif elain in ("kissa", "kisu", "mirri", "katti"):
+        elain += " 🐱"
+    elif elain in ("hevonen", "heppa", "poni"):
+        elain += " 🐴"
+    elif elain in ("tiikeri", "tikru"):
+        elain += " 🐯"
+    elif elain in ("pingiivi", "pingu"):
+        elain += " 🐧"
+    elif elain in ("pupu", "kani", "jänö", "jänis"):
+        elain += " 🐰"
+    elif elain in ("kala", "kalat", "fisu", "fisut"):
+        elain += " 🐟"
+    elif elain in ("käärme", "mato", "pyton"):
+        elain += " 🐍"
+    return elain
+
 #Syötetään testidataa ystäväkirjaan, jotta ohjelma toimii samantien vitsin heiton ja kaverihaun kohdalla (ei kuitenkaan tallennettu yst_kirja.txt tai vitsi.txt)
 ystavakirja = [
     {"Nimi": "Jouko",
@@ -36,7 +55,7 @@ ystavakirja = [
     "Lempieläin": "koira",
     "Haaveammatti": "poliisi",
     "Päivän fiilis hymiönä": "ò_Ô",
-    "Paras vitsi": "Pieru."},
+    "Paras vitsi": "Kaksi mummoa meni mustikkaan, toinen ei mahtunut!"},
 
     {"Nimi": "Eevi",
     "Lempinimi": "Eve",
@@ -69,6 +88,7 @@ ystavakirja = [
     "Paras vitsi": "Miksi Suomessa palkat eivät kasva? - Koska jokaisella firmalla on palkanlaskija!"}]
 
 for ystava in ystavakirja:
+    ystava["Lempieläin"] = lisaa_hymio(ystava["Lempieläin"])
     tallenna_vitsi("data/testivitsi.txt", ystava["Paras vitsi"])
     tallenna_ystava("data/testidata.txt", ystava)
 
@@ -92,22 +112,7 @@ def lisaa_ystava(lista):
     vari = kysy_teksti("Lempiväri: ")
     ruoka = kysy_teksti("Lempiruoka: ")
     elain = kysy_teksti("Lempieläin: ")
-    if elain in ("koira", "hauva", "rakki"):
-        elain += " 🐶"
-    elif elain in ("kissa", "kisu", "mirri", "katti"):
-        elain += " 🐱"
-    elif elain in ("hevonen", "heppa", "poni"):
-        elain += " 🐴"
-    elif elain in ("tiikeri", "tikru"):
-        elain += " 🐯"
-    elif elain in ("pingiivi", "pingu"):
-        elain += " 🐧"
-    elif elain in ("pupu", "kani", "jänö", "jänis"):
-        elain += " 🐰"
-    elif elain in ("kala", "kalat", "fisu", "fisut"):
-        elain += " 🐟"
-    elif elain in ("käärme", "mato", "pyton"):
-        elain += " 🐍"
+    elain = lisaa_hymio(elain)
     ammatti = kysy_teksti("Haaveammatti: ")
     fiilis = kysy_teksti("Päivän fiilis hymiönä: ")
     vitsi = kysy_teksti("Paras vitsi: ")
