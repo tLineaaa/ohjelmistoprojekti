@@ -190,7 +190,7 @@ while True: # Taas ikuisuussilmukka
         print("-"*35)
         tauko_ja_paluu()
     if valinta == 4:
-        with open("data/testidata.txt", encoding="utf8") as luetaan:
+        with open("data/testidata.txt", encoding="utf-8") as luetaan: #kävin palautuksen jälkeen lisäämässä väliviivan utf-8 -kohtaan, huomasin videota katsoessa tän :D
             sisalto = luetaan.read()
             print(sisalto)
         tauko_ja_paluu()
